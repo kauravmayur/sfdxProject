@@ -39,7 +39,7 @@ node {
 
             stage('Authorize DevHub') {
                 println 'code in Authorize DevHub'
-                rc = command "sfdx force:auth:jwt:grant --instanceurl https://login.salesforce.com --clientid 3MVG9ZL0ppGP5UrAzPtQ.ax5FfWl5YyGs4Z0EPCATLYjdSgRot1huY92XP8XMJl.iqZGQ13Ck8A.Ll0lkrlF7 --username kauravtest@gmail.com --jwtkeyfile **** --setdefaultdevhubusername --setalias HubOrg"
+                rc = command "sfdx force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 println rc
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
