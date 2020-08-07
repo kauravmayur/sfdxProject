@@ -2,12 +2,7 @@
     "orgName": "Demo Company",
     "edition": "Developer",
     
-    "settings": {
-        "activitySettings": {
-            "enableActivitiesReminder": false
-        },
-        "lightningExperienceSettings": {
-            "enableS1DesktopEnabled": true
-        }
+    "orgPreferences" : {
+        "enabled": ["S1DesktopEnabled"]
     }
 }
