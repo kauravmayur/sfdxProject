@@ -3,11 +3,11 @@
     "edition": "Developer",
     
     "settings": {
-        "orgPreferenceSettings": {
-            "s1DesktopEnabled": true
-        },
         "activitySettings": {
             "enableActivitiesReminder": false
+        },
+        "lightningExperienceSettings": {
+            "enableS1DesktopEnabled": true
         }
     }
 }
