@@ -47,7 +47,7 @@ node {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
                 }
-                rmsg = command "${toolbelt} force:org:create --definitionfile config/enterprise-scratch-def.json --json --setdefaultusername"
+                //rmsg = command "${toolbelt} force:org:create --definitionfile config/enterprise-scratch-def.json --json --setdefaultusername"
                 println rmsg
                 println('Hello from a Job DSL script!')
                 println(rmsg)
