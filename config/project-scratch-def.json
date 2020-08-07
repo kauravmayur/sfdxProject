@@ -1,7 +1,19 @@
 {
     "orgName": "Demo Company",
     "edition": "Developer",
+    "orgPreferences" :{
+        "settings": {
+            "orgPreferenceSettings": {
+                "s1DesktopEnabled": true
+            },
+            "activitySettings": {
+                "enableActivitiesReminder": false
+            }
+        }
+    }
+    /*
     "orgPreferences" : {
         "enabled": ["S1DesktopEnabled"]
     }
+    */
 }
