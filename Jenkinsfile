@@ -49,18 +49,6 @@ node {
                 }
             }
 
-            stage('Deploye Code') {
-                // need to pull out assigned username
-                if (isUnix()) {
-                    rmsg = sh returnStdout: true, script: "${toolbelt} force:mdapi:deploy -d manifest/. -u ${SF_USERNAME}"
-                }else{
-                rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy -d manifest/. -u ${SF_USERNAME}"
-                }
-                    printf rmsg
-                    println('Hello from a Job DSL script!')
-                    println(rmsg)
-            }
-
             // -------------------------------------------------------------------------
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
