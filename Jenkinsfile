@@ -48,7 +48,6 @@ node {
                     error 'Salesforce dev hub org authorization failed.'
                 }
             }
-        
 
             // -------------------------------------------------------------------------
             // Create new scratch org to test your code.
