@@ -68,7 +68,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Display Test Scratch Org') {
-                rc = command "${toolbelt} force:org:display --targetusername my-devhub-org"
+                rc = command "${toolbelt} force:org:display --targetusername kauravtest@gmail.com"
                 if (rc != 0) {
                     error 'Salesforce test scratch org display failed.'
                 }
