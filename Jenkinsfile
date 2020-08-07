@@ -31,7 +31,7 @@ node {
     println 'before withEnv'
     withEnv(["HOME=${env.WORKSPACE}"]) {
         println 'after withEnv'
-        
+        println 'This is current Org'
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
             // -------------------------------------------------------------------------
