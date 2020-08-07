@@ -30,7 +30,7 @@ node {
     // -------------------------------------------------------------------------
     
     withEnv(["HOME=${env.WORKSPACE}"]) {
-        
+        println ${env.WORKSPACE}
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
             // -------------------------------------------------------------------------
