@@ -28,9 +28,10 @@ node {
     // Run all the enclosed stages with access to the Salesforce
     // JWT key credentials.
     // -------------------------------------------------------------------------
-    
+    println 'before withEnv'
     withEnv(["HOME=${env.WORKSPACE}"]) {
-        println ${env.WORKSPACE}
+        println 'after withEnv'
+        
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
             // -------------------------------------------------------------------------
