@@ -11,7 +11,7 @@ node {
     def PACKAGE_NAME='0Ho1U000000CaUzSAK'
     def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
-
+    def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
 
@@ -53,10 +53,21 @@ node {
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
             stage('Create Test Scratch Org') {
-                //rc = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
-                rc = command "${toolbelt} force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
-                println rc
-                println rc.result.username
+                //rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
+                rmsg = command "${toolbelt} force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername"
+                println rmsg
+                def beginIndex = rmsg.indexOf('{')
+                def endIndex = rmsg.indexOf('}')
+                println(beginIndex)
+                println(endIndex)
+                def jsobSubstring = rmsg.substring(beginIndex)
+                println(jsobSubstring)
+                
+                def jsonSlurper = new JsonSlurperClassic()
+                def robj = jsonSlurper.parseText(jsobSubstring)
+                //if (robj.status != "ok") { error 'org creation failed: ' + robj.message }
+                SFDC_USERNAME=robj.result.username
+                robj = null
                 if (rc != 0) {
                     error 'Salesforce test scratch org creation failed.'
                 }
@@ -68,7 +79,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Display Test Scratch Org') {
-                rc = command "${toolbelt} force:org:display --targetusername kauravtest@gmail.com"
+                rc = command "${toolbelt} force:org:display --targetusername ${SFDC_USERNAME}"
                 if (rc != 0) {
                     error 'Salesforce test scratch org display failed.'
                 }
@@ -80,7 +91,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Push To Test Scratch Org') {
-                rc = command "${toolbelt} force:source:push --targetusername ciorg"
+                rc = command "${toolbelt} force:source:push --targetusername ${SFDC_USERNAME}"
                 if (rc != 0) {
                     error 'Salesforce push to test scratch org failed.'
                 }
@@ -92,7 +103,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Run Tests In Test Scratch Org') {
-                rc = command "${toolbelt} force:apex:test:run --targetusername ciorg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                rc = command "${toolbelt} force:apex:test:run --targetusername ${SFDC_USERNAME} --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
@@ -104,7 +115,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Delete Test Scratch Org') {
-                rc = command "${toolbelt} force:org:delete --targetusername ciorg --noprompt"
+                rc = command "${toolbelt} force:org:delete --targetusername ${SFDC_USERNAME} --noprompt"
                 if (rc != 0) {
                     error 'Salesforce test scratch org deletion failed.'
                 }
