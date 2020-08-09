@@ -54,7 +54,7 @@ node {
             // -------------------------------------------------------------------------
             stage('Create Test Scratch Org') {
                 //rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
-                rmsg = command "${toolbelt} force:org:create --definitionfile config/project-scratch-def.json --json --setdefaultusername --setalias myScratchOrg"
+                rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
                 println rmsg
                 /*
                 def beginIndex = rmsg.indexOf('{')
@@ -79,14 +79,14 @@ node {
             // -------------------------------------------------------------------------
             // Display test scratch org info.
             // -------------------------------------------------------------------------
-            /*
+            
             stage('Display Test Scratch Org') {
                 rc = command "${toolbelt} force:org:display --targetusername myScratchOrg"
                 if (rc != 0) {
                     error 'Salesforce test scratch org display failed.'
                 }
             }
-            */
+            
 
             // -------------------------------------------------------------------------
             // Push source to test scratch org.
