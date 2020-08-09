@@ -122,7 +122,7 @@ node {
                     error 'Salesforce test scratch org deletion failed.'
                 }
             }
-            */
+            
 
             // -------------------------------------------------------------------------
             // Create package version.
