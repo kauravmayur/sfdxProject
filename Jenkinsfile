@@ -81,7 +81,7 @@ node {
             // -------------------------------------------------------------------------
             /*
             stage('Display Test Scratch Org') {
-                rc = command "${toolbelt} force:org:display --targetusername kauravtest@gmail.com"
+                rc = command "${toolbelt} force:org:display --targetusername myScratchOrg"
                 if (rc != 0) {
                     error 'Salesforce test scratch org display failed.'
                 }
@@ -93,7 +93,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Push To Test Scratch Org') {
-                rc = command "${toolbelt} force:source:push"
+                rc = command "${toolbelt} force:source:push --targetusername myScratchOrg"
                 if (rc != 0) {
                     error 'Salesforce push to test scratch org failed.'
                 }
@@ -105,7 +105,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Run Tests In Test Scratch Org') {
-                rc = command "${toolbelt} force:apex:test:run --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                rc = command "${toolbelt} force:apex:test:run --targetusername myScratchOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
@@ -122,7 +122,7 @@ node {
                     error 'Salesforce test scratch org deletion failed.'
                 }
             }
-            
+            */
 
             // -------------------------------------------------------------------------
             // Create package version.
