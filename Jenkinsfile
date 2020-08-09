@@ -23,7 +23,10 @@ node {
         checkout scm
     }
 
-
+    println SF_CONSUMER_KEY
+    println SF_USERNAME
+    println SERVER_KEY_CREDENTALS_ID
+    println SF_INSTANCE_URL
     // -------------------------------------------------------------------------
     // Run all the enclosed stages with access to the Salesforce
     // JWT key credentials.
