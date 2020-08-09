@@ -1,4 +1,4 @@
 @isTest
 public class AccountControllerTest{
-    AccountController.findAccounts('Sample Account');
+    List<Account>  acclist = AccountController.findAccounts('Sample Account');
 }
