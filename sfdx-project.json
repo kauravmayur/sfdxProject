@@ -2,7 +2,10 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "default": true
+            "default": true,
+            "package": "jenkins1",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT"
         },
         {
             "path": "force-app\\main\\default",
@@ -17,6 +20,7 @@
     "sourceApiVersion": "45.0",
     "packageAliases": {
         "jenkins": "0Ho7F000000GmlMSAS",
-        "Jenkins@1.0.0-1": "04tB0000000IB1EIAW"
+        "Jenkins@1.0.0-1": "04tB0000000IB1EIAW",
+        "jenkins1": "0Ho7F000000GmlRSAS"
     }
 }
