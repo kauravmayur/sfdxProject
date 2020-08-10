@@ -138,21 +138,21 @@ node {
             // -------------------------------------------------------------------------
             // Create new scratch org to install package to.
             // -------------------------------------------------------------------------
-
+            /*
             stage('Create Package Install Scratch Org') {
                 rc = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
                 if (rc != 0) {
                     error 'Salesforce package install scratch org creation failed.'
                 }
             }
-
+            */
 
             // -------------------------------------------------------------------------
             // Display install scratch org info.
             // -------------------------------------------------------------------------
 
             stage('Display Install Scratch Org') {
-                rc = command "${toolbelt} force:org:display --targetusername installorg"
+                rc = command "${toolbelt} force:org:display --targetusername myScratchOrg"
                 if (rc != 0) {
                     error 'Salesforce install scratch org display failed.'
                 }
@@ -164,7 +164,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Install Package In Scratch Org') {
-                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername installorg --wait 10"
+                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --INSTALLATIONKEY test1234 --targetusername myScratchOrg --wait 10"
                 if (rc != 0) {
                     error 'Salesforce package install failed.'
                 }
@@ -176,7 +176,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Run Tests In Package Install Scratch Org') {
-                rc = command "${toolbelt} force:apex:test:run --targetusername installorg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
+                rc = command "${toolbelt} force:apex:test:run --targetusername myScratchOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
                 if (rc != 0) {
                     error 'Salesforce unit test run in pacakge install scratch org failed.'
                 }
@@ -188,7 +188,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Delete Package Install Scratch Org') {
-                rc = command "${toolbelt} force:org:delete --targetusername installorg --noprompt"
+                rc = command "${toolbelt} force:org:delete --targetusername myScratchOrg --noprompt"
                 if (rc != 0) {
                     error 'Salesforce package install scratch org deletion failed.'
                 }
