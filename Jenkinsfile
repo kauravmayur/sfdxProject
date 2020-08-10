@@ -123,7 +123,7 @@ node {
                 }
                 */
                 //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
-                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg"
+                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 println output
                 // Wait 5 minutes for package replication.
                 sleep 30
@@ -168,7 +168,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Install Package In Scratch Org') {
-                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --installationkey test1234 --targetusername myScratchOrg --wait 10"
+                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --installationkeybypass --targetusername myScratchOrg --wait 10"
                 if (rc != 0) {
                     error 'Salesforce package install failed.'
                 }
