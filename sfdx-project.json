@@ -12,7 +12,7 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "45.0",
     "packageAliases": {
-        "sampleJenkins": "0Ho0K000000XZDpSAO",
+        "jenkinsSfdxDemo": "0Ho0K000000XZDpSAO",
         "sampleJenkins@1.0.0-1": "",
         "sampleJenkins@0.1.0-2": "04t7F000005QyziQAC",
         "sampleJenkins@0.1.0-3": "04t7F000005QyznQAC",
