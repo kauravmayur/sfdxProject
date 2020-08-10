@@ -56,8 +56,8 @@ node {
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
             stage('Create Test Scratch Org') {
-                rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
-                println rmsg
+                //rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
+                //println rmsg
             }
 
 
@@ -123,7 +123,7 @@ node {
                 }
                 */
                 //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
-                packageCreation = command "${toolbelt} force:package:create --name jenkinsSfdxDemo --description "My Package" --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                packageCreation = command "${toolbelt} force:package:create --name jenkinsSfdxDemo --description My Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                 println packageCreation
                 PACKAGE_NAME = packageCreation
                 output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg"
