@@ -1,7 +1,7 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
-import groovy.json.JsonSlurper
+
 node {
 
     def SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
@@ -129,7 +129,7 @@ node {
                 sleep 30
 
                 
-                def jsonSlurper = new JsonSlurper()
+                def jsonSlurper = new JsonSlurperClassic()
                 
                 def response = jsonSlurper.parseText(output)
 
