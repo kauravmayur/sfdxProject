@@ -123,7 +123,7 @@ node {
                 }
                 */
                 //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
-                output = command "${toolbelt} force:package:version:create -p sampleJenkins -d force-app -k test1234 --wait 10 -v HubOrg"
+                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --description force-app --installationkeybypass --wait 10 --targetdevhubusername HubOrg"
                 println output
                 // Wait 5 minutes for package replication.
                 sleep 30
