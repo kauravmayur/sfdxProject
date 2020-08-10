@@ -1,7 +1,7 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
-
+import groovy.json.JsonSlurper
 node {
 
     def SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
@@ -128,9 +128,8 @@ node {
                 // Wait 5 minutes for package replication.
                 sleep 30
 
-                PACKAGE_VERSION = output.result.SubscriberPackageVersionId
-
-                def jsonSlurper = new JsonSlurperClassic()
+                
+                def jsonSlurper = new JsonSlurper()
                 
                 def response = jsonSlurper.parseText(output)
 
