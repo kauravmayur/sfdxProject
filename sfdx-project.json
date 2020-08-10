@@ -6,13 +6,6 @@
             "package": "sampleJenkins",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
-        },
-        {
-            "path": "force-app\\main\\default",
-            "package": "jenkins",
-            "versionName": "Jenkins Winter ‘20",
-            "versionNumber": "1.0.0.NEXT",
-            "default": false
         }
     ],
     "namespace": "",
