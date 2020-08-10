@@ -5,7 +5,7 @@ global class LeadProcessor implements Database.Batchable<sObject>{
         return Database.getQueryLocator('Select id, name, leadSource from Lead');
     }
     public void execute(Database.BatchableContext BC, list<Lead> scope){
-        system.debug('***LeadProcessor Class debug***');
+        system.debug('***LeadProcessor Class***');
         for(Lead ld: scope){
             ld.leadSource = 'Dreamforce';
             recordsCounts = recordsCounts + 1;
