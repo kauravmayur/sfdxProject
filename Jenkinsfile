@@ -123,7 +123,7 @@ node {
                 }
                 */
                 //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
-                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --description force-app --installationkeybypass --wait 10 --targetdevhubusername HubOrg"
+                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg"
                 println output
                 // Wait 5 minutes for package replication.
                 sleep 30
