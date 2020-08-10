@@ -8,8 +8,8 @@ node {
     def SF_USERNAME=env.HUB_ORG_DH
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
-    def PACKAGE_NAME='jenkinsDemo'
-    def PACKAGE_VERSION = '04t7F000005QyziQAC'
+    def PACKAGE_NAME='sampleJenkins'
+    def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
@@ -112,17 +112,20 @@ node {
             // -------------------------------------------------------------------------
             // Create package version.
             // -------------------------------------------------------------------------
-            /*
+            
             stage('Create Package Version') {
+                /*
                 if (isUnix()) {
                     output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
                 } else {
                     output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg").trim()
                     output = output.readLines().drop(1).join(" ")
                 }
+                */
+                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
                 println output
                 // Wait 5 minutes for package replication.
-                sleep 300
+                sleep 30
 
                 def jsonSlurper = new JsonSlurperClassic()
                 def response = jsonSlurper.parseText(output)
@@ -133,7 +136,7 @@ node {
 
                 echo ${PACKAGE_VERSION}
             }
-            */
+            
 
             // -------------------------------------------------------------------------
             // Create new scratch org to install package to.

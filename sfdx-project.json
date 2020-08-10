@@ -21,6 +21,7 @@
     "packageAliases": {
         "sampleJenkins": "0Ho7F000000GmlgSAC",
         "sampleJenkins@1.0.0-1": "",
-        "sampleJenkins@0.1.0-2": "04t7F000005QyziQAC"
+        "sampleJenkins@0.1.0-2": "04t7F000005QyziQAC",
+        "sampleJenkins@0.1.0-3": "04t7F000005QyznQAC"
     }
 }
