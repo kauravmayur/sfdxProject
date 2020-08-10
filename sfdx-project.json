@@ -3,7 +3,7 @@
         {
             "path": "force-app",
             "default": true,
-            "package": "jenkins1",
+            "package": "jenkinsDemo",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
         },
@@ -19,8 +19,7 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "45.0",
     "packageAliases": {
-        "jenkins": "0Ho7F000000GmlMSAS",
-        "Jenkins@1.0.0-1": "04tB0000000IB1EIAW",
-        "jenkins1": "0Ho7F000000GmlRSAS"
+        "jenkinsDemo": "",
+        "jenkinsDemo@1.0.0-1": ""
     }
 }
