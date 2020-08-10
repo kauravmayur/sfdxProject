@@ -128,7 +128,7 @@ node {
                 // Wait 5 minutes for package replication.
                 sleep 30
 
-                PACKAGE_VERSION = response.result.SubscriberPackageVersionId
+                PACKAGE_VERSION = output.result.SubscriberPackageVersionId
 
                 def jsonSlurper = new JsonSlurperClassic()
                 
