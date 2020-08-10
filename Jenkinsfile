@@ -123,7 +123,7 @@ node {
                 }
                 */
                 //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
-                packageCreation = command "${toolbelt} force:package:create --name jenkinsSfdxDemo --description My Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                packageCreation = command "${toolbelt} force:package:create --name jenkinsSfdxDemo  --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                 println packageCreation
                 PACKAGE_NAME = packageCreation
                 output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg"
