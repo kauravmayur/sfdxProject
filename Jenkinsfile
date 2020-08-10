@@ -128,11 +128,13 @@ node {
                 // Wait 5 minutes for package replication.
                 sleep 30
 
-                def jsonSlurper = new JsonSlurper()
+                PACKAGE_VERSION = response.result.SubscriberPackageVersionId
+
+                def jsonSlurper = new JsonSlurperClassic()
                 
                 def response = jsonSlurper.parseText(output)
 
-                PACKAGE_VERSION = response.result.SubscriberPackageVersionId
+                //PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                 println PACKAGE_VERSION
                 response = null
 
@@ -193,10 +195,12 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Delete Package Install Scratch Org') {
+                /*
                 rc = command "${toolbelt} force:org:delete --targetusername myScratchOrg --noprompt"
                 if (rc != 0) {
                     error 'Salesforce package install scratch org deletion failed.'
                 }
+                */
             }
         }
     }
