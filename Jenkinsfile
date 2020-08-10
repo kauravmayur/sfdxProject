@@ -56,8 +56,8 @@ node {
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
             stage('Create Test Scratch Org') {
-                //rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
-                //println rmsg
+                rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
+                println rmsg
             }
 
 
