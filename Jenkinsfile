@@ -56,26 +56,8 @@ node {
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
             stage('Create Test Scratch Org') {
-                //rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias ciorg --wait 10 --durationdays 1"
                 //rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
                 //println rmsg
-                /*
-                def beginIndex = rmsg.indexOf('{')
-                def endIndex = rmsg.indexOf('}')
-                println(beginIndex)
-                println(endIndex)
-                def jsobSubstring = rmsg.substring(beginIndex)
-                println(jsobSubstring)
-                
-                def jsonSlurper = new JsonSlurperClassic()
-                def robj = jsonSlurper.parseText(jsobSubstring)
-                //if (robj.status != "ok") { error 'org creation failed: ' + robj.message }
-                SFDC_USERNAME=robj.result.username
-                robj = null
-                if (rc != 0) {
-                    error 'Salesforce test scratch org creation failed.'
-                }
-                */
             }
 
 
@@ -106,26 +88,26 @@ node {
             // -------------------------------------------------------------------------
             // Run unit tests in test scratch org.
             // -------------------------------------------------------------------------
-            /*
+            
             stage('Run Tests In Test Scratch Org') {
                 rc = command "${toolbelt} force:apex:test:run --targetusername myScratchOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
             }
-            */
+            
 
             // -------------------------------------------------------------------------
             // Delete test scratch org.
             // -------------------------------------------------------------------------
-            /*
+            
             stage('Delete Test Scratch Org') {
                 rc = command "${toolbelt} force:org:delete --targetusername ciorg --noprompt"
                 if (rc != 0) {
                     error 'Salesforce test scratch org deletion failed.'
                 }
             }
-            */
+            
 
             // -------------------------------------------------------------------------
             // Create package version.
