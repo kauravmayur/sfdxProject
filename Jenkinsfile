@@ -164,7 +164,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Install Package In Scratch Org') {
-                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --installationkeybypass --targetusername myScratchOrg --wait 10"
+                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername myScratchOrg --wait 10"
                 if (rc != 0) {
                     error 'Salesforce package install failed.'
                 }
