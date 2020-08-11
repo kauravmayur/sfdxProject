@@ -1,6 +1,7 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
+import groovy.json.*
 
 node {
 
@@ -129,11 +130,11 @@ node {
                 sleep 30
 
                 
-                def jsonSlurper = new JsonSlurperClassic()
-                
+                //def jsonSlurper = new JsonSlurperClassic()
+                def jsonSlurper = new JsonSlurper()
                 def response = jsonSlurper.parseText(output)
 
-                //PACKAGE_VERSION = response.result.SubscriberPackageVersionId
+                PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                 println PACKAGE_VERSION
                 response = null
 
