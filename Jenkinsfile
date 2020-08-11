@@ -38,7 +38,9 @@ node {
     // Check out code from source control.
     // -------------------------------------------------------------------------
 
-    
+    stage('checkout source') {
+        checkout scm
+    }
 
     println SF_CONSUMER_KEY
     println SF_USERNAME
@@ -50,6 +52,8 @@ node {
     // -------------------------------------------------------------------------
     println 'before withEnv'
 
+    
+}
 
 def command(script) {
     if (isUnix()) {
