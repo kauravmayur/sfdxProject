@@ -10,7 +10,7 @@ node {
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='jenkinsSfdxDemo'
-    def PACKAGE_VERSION = '04t0K000001KiJaQAK'
+    def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
@@ -115,7 +115,7 @@ node {
             // -------------------------------------------------------------------------
             
             stage('Create Package Version') {
-                /*
+                
                 output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 println output
                 // Wait 5 minutes for package replication.
@@ -131,7 +131,7 @@ node {
                 response = null
 
                 echo ${PACKAGE_VERSION}
-                */
+                
             }
             
 
@@ -140,12 +140,12 @@ node {
             // -------------------------------------------------------------------------
             
             stage('Create Package Install Scratch Org') {
-                /*
+                
                 rc = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
                 if (rc != 0) {
                     error 'Salesforce package install scratch org creation failed.'
                 }
-                */
+                
             }
             
 
