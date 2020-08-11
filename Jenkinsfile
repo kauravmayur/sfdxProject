@@ -15,9 +15,7 @@ node {
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
-    def person = new JsonSlurper().parseText(json) as Person
-    println person.status
-    println person.result.Status
+    
 
     // -------------------------------------------------------------------------
     // Check out code from source control.
