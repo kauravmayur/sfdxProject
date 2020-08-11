@@ -20,10 +20,6 @@
     "sourceApiVersion": "45.0",
     "packageAliases": {
         "jenkinsSfdxDemo": "0Ho0K000000XZDpSAO",
-        "sampleJenkins@1.0.0-1": "",
-        "sampleJenkins@0.1.0-2": "04t7F000005QyziQAC",
-        "sampleJenkins@0.1.0-3": "04t7F000005QyznQAC",
-        "sampleJenkins@0.1.0-4": "04t7F000005Qz02QAC",
         "jenkinsSfdxDemo@0.1.0-1": "04t0K000001KiJaQAK"
     }
 }
