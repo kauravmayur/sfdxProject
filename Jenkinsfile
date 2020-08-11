@@ -10,7 +10,7 @@ node {
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='jenkinsSfdxDemo'
-    def PACKAGE_VERSION
+    def PACKAGE_VERSION = '04t0K000001KiJaQAK'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
@@ -57,8 +57,8 @@ node {
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
             stage('Create Test Scratch Org') {
-                rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
-                println rmsg
+                //rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
+                //println rmsg
             }
 
 
@@ -116,14 +116,6 @@ node {
             
             stage('Create Package Version') {
                 /*
-                if (isUnix()) {
-                    output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
-                } else {
-                    output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg").trim()
-                    output = output.readLines().drop(1).join(" ")
-                }
-                */
-                //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg"
                 output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 println output
                 // Wait 5 minutes for package replication.
@@ -139,6 +131,7 @@ node {
                 response = null
 
                 echo ${PACKAGE_VERSION}
+                */
             }
             
 

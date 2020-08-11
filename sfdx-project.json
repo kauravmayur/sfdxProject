@@ -6,6 +6,13 @@
             "package": "jenkinsSfdxDemo",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
+        },
+        {
+            "path": "force-app\\main\\default",
+            "package": "jenkins",
+            "versionName": "Jenkins Winter ‘20",
+            "versionNumber": "1.0.0.NEXT",
+            "default": false
         }
     ],
     "namespace": "",
@@ -17,6 +24,6 @@
         "sampleJenkins@0.1.0-2": "04t7F000005QyziQAC",
         "sampleJenkins@0.1.0-3": "04t7F000005QyznQAC",
         "sampleJenkins@0.1.0-4": "04t7F000005Qz02QAC",
-        "sampleJenkins@0.1.0-5": "04t7F000005Qz07QAC"
+        "jenkinsSfdxDemo@0.1.0-6": "04t0K000001KiJaQAK"
     }
 }
