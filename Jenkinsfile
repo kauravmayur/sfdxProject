@@ -57,8 +57,10 @@ node {
             // Create new scratch org to test your code.
             // -------------------------------------------------------------------------
             stage('Create Test Scratch Org') {
+                /*
                 rmsg = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias myScratchOrg --wait 10 --durationdays 1"
                 println rmsg
+                */
             }
 
 
@@ -155,7 +157,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Display Install Scratch Org') {
-                rc = command "${toolbelt} force:org:display --targetusername installorg"
+                rc = command "${toolbelt} force:org:display --targetusername myScratchOrg"
                 if (rc != 0) {
                     error 'Salesforce install scratch org display failed.'
                 }
@@ -167,7 +169,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Install Package In Scratch Org') {
-                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername installorg --wait 10"
+                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername myScratchOrg --wait 10"
                 if (rc != 0) {
                     error 'Salesforce package install failed.'
                 }
@@ -179,7 +181,7 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Run Tests In Package Install Scratch Org') {
-                rc = command "${toolbelt} force:apex:test:run --targetusername installorg --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL} --wait 10"
+                rc = command "${toolbelt} force:apex:test:run --targetusername myScratchOrg --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL} --wait 10"
                 if (rc != 0) {
                     error 'Salesforce unit test run in pacakge install scratch org failed.'
                 }
