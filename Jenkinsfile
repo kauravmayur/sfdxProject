@@ -15,26 +15,9 @@ node {
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
-    def json = '''
-            {
-                "status": 0,
-                "result": {
-                    "Id": "08c0K000000XZFvQAO",
-                    "Status": "Success",
-                    "Package2Id": "0Ho0K000000XZDpSAO",
-                    "Package2VersionId": "05i0K000000fxWhQAI",
-                    "SubscriberPackageVersionId": "04t0K000001KiJGQA0",
-                    "Tag": null,
-                    "Branch": null,
-                    "Error": [],
-                    "CreatedDate": "2020-08-10 23:21"
-                }
-                }'''
-    def person = new JsonSlurper().parseText(json) 
-    println person.status
-    println person.result.id
     
-    //PACKAGE_VERSION = result.result.orgId
+    
+   
 
     // -------------------------------------------------------------------------
     // Check out code from source control.
@@ -60,6 +43,26 @@ node {
     withEnv(["HOME=${env.WORKSPACE}"]) {
         println 'after withEnv'
         println 'This is current Org'
+
+        def json = '''
+            {
+                "status": 0,
+                "result": {
+                    "Id": "08c0K000000XZFvQAO",
+                    "Status": "Success",
+                    "Package2Id": "0Ho0K000000XZDpSAO",
+                    "Package2VersionId": "05i0K000000fxWhQAI",
+                    "SubscriberPackageVersionId": "04t0K000001KiJGQA0",
+                    "Tag": null,
+                    "Branch": null,
+                    "Error": [],
+                    "CreatedDate": "2020-08-10 23:21"
+                }
+                }'''
+    def person = new JsonSlurper().parseText(json) 
+    println person.status
+    println person.result.id
+    
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
             // -------------------------------------------------------------------------
