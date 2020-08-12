@@ -30,7 +30,7 @@ node {
                     "CreatedDate": "2020-08-10 23:21"
                 }
                 }'''
-    def person = new JsonSlurper().parseText(json) as Person
+    def person = new JsonSlurper().parseText(json) 
     println person.status
     println person.result.id
     
