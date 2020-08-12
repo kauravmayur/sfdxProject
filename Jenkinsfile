@@ -49,10 +49,11 @@ node {
                 rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
                 println rc
                 
+                def jsonSlurper = new JsonSlurper()
+                def response = jsonSlurper.parseText(rc)
 
-                def slurper = new groovy.json.JsonSlurper()
-                def response = slurper.parseText(rc)
-                def orgId = response.result.orgIdn
+                PACKAGE_VERSION = response.result.orgIdn
+
                 /*
                 def jsonSlurper = new JsonSlurper()
                 
