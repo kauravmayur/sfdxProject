@@ -46,8 +46,14 @@ node {
 
             stage('Authorize DevHub') {
                 println 'Authorize DevHub Started'
-                rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}  --setalias HubOrg"
+                rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
                 println rc
+                
+                def jsonSlurper = new JsonSlurper()
+                def response = jsonSlurper.parseText(output)
+                def testsRan = response.result.summary.testsRan
+                
+                println testsRan
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
@@ -61,20 +67,15 @@ node {
             // -------------------------------------------------------------------------
             // Run unit tests in test scratch org.
             // -------------------------------------------------------------------------
-            
+            /*
             stage('Run Tests In Test Scratch Org') {
                 rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL}"
-                println rc.result.summary.testsRan
-
-                def jsonSlurper = new JsonSlurper()
-                def response = jsonSlurper.parseText(output)
-
-                PACKAGE_VERSION = response.result.summary.testsRan
+                
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
             }
-            
+            */
             // -------------------------------------------------------------------------
             // Create package version.
             // -------------------------------------------------------------------------
