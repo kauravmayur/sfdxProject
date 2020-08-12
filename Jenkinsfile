@@ -56,13 +56,12 @@ node {
                 println rc
                 
 
-                /*
-                def jsonSlurper = new JsonSlurper()
                 
-                def response = jsonSlurper.parseText(rc)
-                def orgId = response.result.orgIdn
-                */
-                println orgId
+                def jsonSlurper = new JsonSlurper()
+                //def response = jsonSlurper.parseText(rc)
+                //def orgId = response.result.orgIdn
+                
+                //println orgId
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
