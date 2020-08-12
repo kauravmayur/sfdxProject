@@ -2,7 +2,7 @@
 
 import groovy.json.JsonSlurperClassic
 import groovy.json.JsonSlurper
-
+import groovy.json.*
 node {
 
     def SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
@@ -55,7 +55,7 @@ node {
                 rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
                 println rc
                 
-                def jsonSlurper = new JsonSlurperClassic()
+                def jsonSlurper = new JsonSlurper()
                 def response = jsonSlurper.parseText(rc)
                 
                 //def jsonSlurper = new JsonSlurper()
