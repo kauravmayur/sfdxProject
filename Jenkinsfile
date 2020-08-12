@@ -10,14 +10,12 @@ node {
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='jenkinsSfdxDemo'
-    def PACKAGE_VERSION
+    def PACKAGE_VERSION = '04t0K000001KiJaQAK'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
     
-    
-   
 
     // -------------------------------------------------------------------------
     // Check out code from source control.
@@ -37,22 +35,9 @@ node {
     // -------------------------------------------------------------------------
     println 'before withEnv'
 
-    def json_str = '''{
-                        "name": "Foo Bar",
-                        "year": 2018,
-                        "timestamp": "2018-03-08T00:00:00",
-                        "tags": [ "person", "employee" ],
-                        "grade": 3.14 }'''
-    def jsonSlurper = new JsonSlurper()
-    cfg = jsonSlurper.parseText(json_str)
-    println(cfg)          // [name:Foo Bar, year:2018, timestamp:2018-03-08T00:00:00, tags:[person, employee], grade:3.14]
-    println(cfg['name'])  // Foo Bar
-    println(cfg.name)     // Foo Bar
-    
     withEnv(["HOME=${env.WORKSPACE}"]) {
         println 'after withEnv'
         println 'This is current Org'
-
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
 
             // -------------------------------------------------------------------------
@@ -60,22 +45,14 @@ node {
             // -------------------------------------------------------------------------
 
             stage('Authorize DevHub') {
-                println 'Authorize DevHub Started'
-                rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
+                println 'code in Authorize DevHub'
+                //rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
+                rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}  --setalias HubOrg"
                 println rc
-                
-                
-                
-                //def jsonSlurper = new JsonSlurper()
-                //def response = jsonSlurper.parseText(rc)
-                //def orgId = response.result.orgIdn
-                
-                //println orgId
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
                 }
-                println 'Authorize DevHub Ended'
             }
 
             
@@ -86,26 +63,26 @@ node {
             // -------------------------------------------------------------------------
             /*
             stage('Run Tests In Test Scratch Org') {
-                rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL}"
-                
+                rc = command "${toolbelt} force:apex:test:run --targetusername myScratchOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
             }
             */
+
+
             // -------------------------------------------------------------------------
             // Create package version.
             // -------------------------------------------------------------------------
-            
             /*
             stage('Create Package Version') {
+                
                 output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 println output
                 // Wait 5 minutes for package replication.
-                
                 sleep 30
-                
 
+                
                 //def jsonSlurper = new JsonSlurperClassic()
                 def jsonSlurper = new JsonSlurper()
                 def response = jsonSlurper.parseText(output)
@@ -113,19 +90,12 @@ node {
                 PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                 println PACKAGE_VERSION
                 response = null
+
                 echo ${PACKAGE_VERSION}
                 
             }
             */
 
-            /*
-            stage('Install Package In Scratch Org') {
-                rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername myScratchOrg --wait 10"
-                if (rc != 0) {
-                    error 'Salesforce package install failed.'
-                }
-            }
-            */
         }
     }
 }
