@@ -63,7 +63,7 @@ node {
             // -------------------------------------------------------------------------
             
             stage('Run Tests In Test Scratch Org') {
-                rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
@@ -73,11 +73,12 @@ node {
             // Create package version.
             // -------------------------------------------------------------------------
             
+            /*
             stage('Create Package Version') {
                 output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 println output
                 // Wait 5 minutes for package replication.
-                println /'/'/'output/'/'/'
+                
                 sleep 30
                 
 
@@ -91,7 +92,7 @@ node {
                 echo ${PACKAGE_VERSION}
                 
             }
-            
+            */
 
             /*
             stage('Install Package In Scratch Org') {
