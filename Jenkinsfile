@@ -15,7 +15,24 @@ node {
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
-
+    def json = '''
+            {
+                "status": 0,
+                "result": {
+                    "Id": "08c0K000000XZFvQAO",
+                    "Status": "Success",
+                    "Package2Id": "0Ho0K000000XZDpSAO",
+                    "Package2VersionId": "05i0K000000fxWhQAI",
+                    "SubscriberPackageVersionId": "04t0K000001KiJGQA0",
+                    "Tag": null,
+                    "Branch": null,
+                    "Error": [],
+                    "CreatedDate": "2020-08-10 23:21"
+                }
+                }'''
+    def person = new JsonSlurper().parseText(json) as Person
+    println person.status
+    println person.result.id
     
     //PACKAGE_VERSION = result.result.orgId
 
@@ -37,21 +54,7 @@ node {
     // -------------------------------------------------------------------------
     println 'before withEnv'
 
-    def json ='''{
-                        "status": 0,
-                        "result": {
-                            "orgId": "00D28000001HHdGEAW",
-                            "accessToken": "735ca861b9e73e18d53b8fb581e4f1c24443a3c6f5ec93c3fdd24ff8adaa809bbfb4d5b4f4032471ca682d2519b78556fbeaf3027551cf31f541d704aedec6e66b7fc09012d849904f9364f03912247b95e96fe78fa3ccced8d8c01eb32ec0f314adf7b43818fb776c67cbf1e5f3d26ddbee1b482d08:3470192bd82a950219c8b8d31f204c0c",
-                            "instanceUrl": "https://mayursinghkaurav-dev-ed.my.salesforce.com",
-                            "loginUrl": "https://login.salesforce.com/",
-                            "username": "kauravtest@gmail.com",
-                            "clientId": "3MVG9ZL0ppGP5UrAzPtQ.ax5FfXs3IrmJ4221D8m_AjlqRsZLovGwwBsQYGZcQ4pQXgm6qAAHE4f5r0RlmkC4",
-                            "privateKey": "C:\\Program Files (x86)\\Jenkins\\workspace\\SFDX_New_@tmp\\secretFiles\\73056497-8d59-4db5-b6e4-4417856719b5\\server.key"
-                        }
-                    }'''
-    def jsonSlurper = new JsonSlurper()
-    def resultStr = jsonSlurper.parseText(json)
-    println resultStr.result.orgId
+    
 
     
     withEnv(["HOME=${env.WORKSPACE}"]) {
