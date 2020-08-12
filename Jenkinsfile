@@ -56,7 +56,7 @@ node {
                 println rc
                 
                 def jsonSlurper = new JsonSlurperClassic()
-                //def response = jsonSlurper.parseText(rc)
+                def response = jsonSlurper.parseText(rc)
                 
                 //def jsonSlurper = new JsonSlurper()
                 //def response = jsonSlurper.parseText(rc)
