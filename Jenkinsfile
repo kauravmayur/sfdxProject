@@ -57,9 +57,9 @@ node {
 									"grade": 3.14 }'''
 				def jsonSlurper = new JsonSlurper()
 				cfg = jsonSlurper.parseText(json_str)
-				println(cfg)          // [name:Foo Bar, year:2018, timestamp:2018-03-08T00:00:00, tags:[person, employee], grade:3.14]
-				println(cfg['name'])  // Foo Bar
-				println(cfg.name)     // Foo Bar
+				println(cfg)          
+				println(cfg['name'])  
+				    
 				
 	
                 //rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
