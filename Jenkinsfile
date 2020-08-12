@@ -64,6 +64,12 @@ node {
             
             stage('Run Tests In Test Scratch Org') {
                 rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL}"
+                println rc.result.summary.testsRan
+
+                def jsonSlurper = new JsonSlurper()
+                def response = jsonSlurper.parseText(output)
+
+                PACKAGE_VERSION = response.result.summary.testsRan
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
