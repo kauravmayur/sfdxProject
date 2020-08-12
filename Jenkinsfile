@@ -16,7 +16,7 @@ node {
     def toolbelt = tool 'toolbelt'
 
 
-    def strResult ='''{
+    def json ='''{
                         "status": 0,
                         "result": {
                             "orgId": "00D28000001HHdGEAW",
@@ -28,8 +28,9 @@ node {
                             "privateKey": "C:\\Program Files (x86)\\Jenkins\\workspace\\SFDX_New_@tmp\\secretFiles\\73056497-8d59-4db5-b6e4-4417856719b5\\server.key"
                         }
                     }'''
-    
-    println strResult.result.orgId
+    def jsonSlurper = new JsonSlurper()
+    def resultStr = jsonSlurper.parseText(json)
+    println resultStr.result.orgId
     //PACKAGE_VERSION = result.result.orgId
 
     // -------------------------------------------------------------------------
