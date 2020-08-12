@@ -37,8 +37,17 @@ node {
     // -------------------------------------------------------------------------
     println 'before withEnv'
 
-    
-
+    def json_str = '''{
+                        "name": "Foo Bar",
+                        "year": 2018,
+                        "timestamp": "2018-03-08T00:00:00",
+                        "tags": [ "person", "employee" ],
+                        "grade": 3.14 }'''
+    def jsonSlurper = new JsonSlurper()
+    cfg = jsonSlurper.parseText(json_str)
+    println(cfg)          // [name:Foo Bar, year:2018, timestamp:2018-03-08T00:00:00, tags:[person, employee], grade:3.14]
+    println(cfg['name'])  // Foo Bar
+    println(cfg.name)     // Foo Bar
     
     withEnv(["HOME=${env.WORKSPACE}"]) {
         println 'after withEnv'
@@ -55,8 +64,8 @@ node {
                 rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
                 println rc
                 
-                //def jsonSlurper = new JsonSlurper()
-                def response = new groovy.json.parseText(rc)
+                def jsonSlurper = new JsonSlurper()
+                def response = jsonSlurper.parseText(rc)
                 
                 //def jsonSlurper = new JsonSlurper()
                 //def response = jsonSlurper.parseText(rc)
