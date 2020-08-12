@@ -58,7 +58,6 @@ node {
 				def jsonSlurper = new JsonSlurper()
 				cfg = jsonSlurper.parseText(json_str)
 				println(cfg)          
-				println(cfg['name'])  
 				    
 				
 	
