@@ -50,7 +50,7 @@ node {
                 println rc
                 
                 def jsonSlurper = new JsonSlurper()
-                def response = jsonSlurper.parseText(rc)
+                def response = jsonSlurper.parseText(java.lang.rc)
 
                 PACKAGE_VERSION = response.result.orgIdn
 
