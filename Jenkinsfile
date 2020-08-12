@@ -44,12 +44,16 @@ node {
             // Authorize the Dev Hub org with JWT key and give it an alias.
             // -------------------------------------------------------------------------
 
-            
+            stage('Authorize DevHub') {
+                println 'code in Authorize DevHub'
+				
+				println 'before withEnv'
+
+				
 				        
 				//rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}  --setalias HubOrg"
                 println rc
-                
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
