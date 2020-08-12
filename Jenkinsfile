@@ -34,18 +34,34 @@ node {
     // JWT key credentials.
     // -------------------------------------------------------------------------
     println 'before withEnv'
-
+	
     withEnv(["HOME=${env.WORKSPACE}"]) {
         println 'after withEnv'
         println 'This is current Org'
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
-
+			
             // -------------------------------------------------------------------------
             // Authorize the Dev Hub org with JWT key and give it an alias.
             // -------------------------------------------------------------------------
 
             stage('Authorize DevHub') {
                 println 'code in Authorize DevHub'
+				
+				println 'before withEnv'
+
+				def json_str = '''{
+									"name": "Foo Bar",
+									"year": 2018,
+									"timestamp": "2018-03-08T00:00:00",
+									"tags": [ "person", "employee" ],
+									"grade": 3.14 }'''
+				def jsonSlurper = new JsonSlurper()
+				cfg = jsonSlurper.parseText(json_str)
+				println(cfg)          // [name:Foo Bar, year:2018, timestamp:2018-03-08T00:00:00, tags:[person, employee], grade:3.14]
+				println(cfg['name'])  // Foo Bar
+				println(cfg.name)     // Foo Bar
+				
+	
                 //rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}  --setalias HubOrg"
                 println rc
