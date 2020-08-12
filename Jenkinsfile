@@ -8,7 +8,7 @@ node {
     def SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
     def SF_USERNAME=env.HUB_ORG_DH
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
-    def TEST_LEVEL='RunLocalTests'
+    def TEST_LEVEL='RunSpecifiedTests'
     def PACKAGE_NAME='jenkinsSfdxDemo'
     def PACKAGE_VERSION = '04t0K000001KiJaQAK'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
