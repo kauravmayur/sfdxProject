@@ -28,9 +28,8 @@ node {
                             "privateKey": "C:\\Program Files (x86)\\Jenkins\\workspace\\SFDX_New_@tmp\\secretFiles\\73056497-8d59-4db5-b6e4-4417856719b5\\server.key"
                         }
                     }'''
-    def jsonSlurper = new JsonSlurper()
-    def result = jsonSlurper.parseText(strResult)
-    println result.result.orgId
+    
+    println strResult.result.orgId
     //PACKAGE_VERSION = result.result.orgId
 
     // -------------------------------------------------------------------------
