@@ -2,7 +2,7 @@
 
 import groovy.json.JsonSlurperClassic
 import groovy.json.JsonSlurper
-import groovy.json.*
+
 node {
 
     def SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
