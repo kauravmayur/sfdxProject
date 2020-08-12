@@ -58,7 +58,7 @@ node {
 
                 
                 def jsonSlurper = new JsonSlurper()
-                //def response = jsonSlurper.parseText(rc)
+                def response = jsonSlurper.parseText(rc)
                 //def orgId = response.result.orgIdn
                 
                 //println orgId
