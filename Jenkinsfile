@@ -16,7 +16,7 @@ node {
     def toolbelt = tool 'toolbelt'
 
 
-    def strResult ='{
+    def strResult ='''{
                         "status": 0,
                         "result": {
                             "orgId": "00D28000001HHdGEAW",
@@ -27,7 +27,7 @@ node {
                             "clientId": "3MVG9ZL0ppGP5UrAzPtQ.ax5FfXs3IrmJ4221D8m_AjlqRsZLovGwwBsQYGZcQ4pQXgm6qAAHE4f5r0RlmkC4",
                             "privateKey": "C:\\Program Files (x86)\\Jenkins\\workspace\\SFDX_New_@tmp\\secretFiles\\73056497-8d59-4db5-b6e4-4417856719b5\\server.key"
                         }
-                    }'
+                    }'''
     def jsonSlurper = new JsonSlurper()
     def result = jsonSlurper.parseText(strResult)
     println result.result.orgId
