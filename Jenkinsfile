@@ -50,9 +50,8 @@ node {
                 println rc
                 
 
-                def json = JsonOutput.toJson(rc)
                 def slurper = new groovy.json.JsonSlurper()
-                def response = slurper.parseText(json)
+                def response = slurper.parseText(rc)
                 def orgId = response.result.orgIdn
                 /*
                 def jsonSlurper = new JsonSlurper()
