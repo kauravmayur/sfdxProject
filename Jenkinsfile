@@ -96,13 +96,8 @@ node {
             // -------------------------------------------------------------------------
             
             stage('Create Package Version') {
-<<<<<<< HEAD
                 //createPackage = "${toolbelt} force:package:create --name jenkinsProject --description "My Package" --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                 //println createPackage
-=======
-                createPackage = "${toolbelt} force:package:create --name jenkinsProject --description "My Package" --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                println createPackage
->>>>>>> 731b4a201577f9c44448e685f65176a11f9555c2
                 output = command "${toolbelt} force:package:version:create --package ${createPackage} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 /*
                 if (isUnix()) {
