@@ -1,8 +1,8 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
-import groovy.json.JsonBuilder  
-//import groovy.json.JsonSlurper  
+//import groovy.json.JsonBuilder  
+import groovy.json.JsonSlurper  
 //import groovy.transform.ToString
 
 node {
@@ -103,8 +103,8 @@ node {
                 sleep 30
 
                 
-                //def jsonSlurper = new JsonSlurperClassic()
-                def jsonSlurper = new JsonSlurper()
+                def jsonSlurper = new JsonSlurperClassic()
+                //def jsonSlurper = new JsonSlurper()
                 def response = jsonSlurper.parseText(output)
 
                 PACKAGE_VERSION = response.result.SubscriberPackageVersionId
