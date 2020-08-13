@@ -54,10 +54,10 @@ node {
 				//rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
                 println rc
-                
+                println rc.status
 
-                PACKAGE_VERSION = rc.result.orgId
-                println PACKAGE_VERSION
+                //PACKAGE_VERSION = rc.result.orgId
+                //println PACKAGE_VERSION
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
