@@ -1,7 +1,9 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
-import groovy.json.JsonSlurper
+//import groovy.json.JsonBuilder  
+import groovy.json.JsonSlurper  
+//import groovy.transform.ToString
 
 node {
 
@@ -52,11 +54,21 @@ node {
 				
 				        
 				//rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
-                rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
+                rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --setalias HubOrg"
+                //rc = sh returnStdout: true, script: "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 println rc
-
+                /*
+                def person = rc
+                // Json String
+                def personJSON = new JsonBuilder(person)
+                println personJSON
+                // Json String to Map
+                def personMap = new JsonSlurper().parseText(personJSON)
                 
-                
+                println(personMap)
+                */
+                //PACKAGE_VERSION = rc.result.orgId
+                //println PACKAGE_VERSION
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
@@ -82,17 +94,28 @@ node {
             // -------------------------------------------------------------------------
             // Create package version.
             // -------------------------------------------------------------------------
-            /*
+            
             stage('Create Package Version') {
-                
-                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
+                //createPackage = "${toolbelt} force:package:create --name jenkinsProject --description "My Package" --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                //println createPackage
+                output = command "${toolbelt} force:package:version:create --package ${createPackage} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
+                /*
+                if (isUnix()) {
+                    output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
+                } else {
+                    output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json").trim()
+                    output = output.readLines().drop(1).join(" ")
+                }
+                */
+                //output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
+                //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 println output
                 // Wait 5 minutes for package replication.
                 sleep 30
 
                 
-                //def jsonSlurper = new JsonSlurperClassic()
-                def jsonSlurper = new JsonSlurper()
+                def jsonSlurper = new JsonSlurperClassic()
+                //def jsonSlurper = new JsonSlurper()
                 def response = jsonSlurper.parseText(output)
 
                 PACKAGE_VERSION = response.result.SubscriberPackageVersionId
@@ -102,7 +125,7 @@ node {
                 echo ${PACKAGE_VERSION}
                 
             }
-            */
+            
 
         }
     }
