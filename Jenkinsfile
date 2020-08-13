@@ -41,7 +41,7 @@ node {
         println 'after withEnv'
         println 'This is current Org'
         withCredentials([file(credentialsId: SERVER_KEY_CREDENTALS_ID, variable: 'server_key_file')]) {
-			
+			sh "cp \$server_key_file /src/main/resources/server_key_file.der"
             // -------------------------------------------------------------------------
             // Authorize the Dev Hub org with JWT key and give it an alias.
             // -------------------------------------------------------------------------
