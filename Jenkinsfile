@@ -62,10 +62,8 @@ node {
                 def personJSON = new JsonBuilder(person).toPrettyString()
                 // Json String to Map
                 def personMap = new JsonSlurper().parseText(personJSON)
-                // using Map to convert to Person object type
-                def newPerson = new Person(personMap)
-                println(person)
-                println(newPerson)
+                
+                println(personMap)
 
                 //PACKAGE_VERSION = rc.result.orgId
                 //println PACKAGE_VERSION
