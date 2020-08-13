@@ -59,22 +59,22 @@ node {
             // -------------------------------------------------------------------------
             // Run unit tests in test scratch org.
             // -------------------------------------------------------------------------
-            
+            /*
             stage('Run Tests In Test Scratch Org') {
                 rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                 if (rc != 0) {
                     error 'Salesforce unit test run in test scratch org failed.'
                 }
             }
-            
+            */
             
             // -------------------------------------------------------------------------
             // Create package version.
             // -------------------------------------------------------------------------
             
             stage('Create Package Version') {
-                //createPackage = command "${toolbelt}  force:package:create --name sfdxPrject --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                //println createPackage
+                createPackage = command "${toolbelt}  force:package:create --name sfdxPrject --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                println createPackage
                 
                 //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                 /*
