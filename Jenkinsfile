@@ -97,7 +97,7 @@ node {
             
             stage('Create Package Version') {
                 
-                output = command "${toolbelt} force:package:version:create --package ${createPackage} --installationkeybypass --wait 10 --targetdevhubusername HubOrg --json"
+                output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg --json"
                 /*
                 if (isUnix()) {
                     output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
