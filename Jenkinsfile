@@ -9,7 +9,7 @@ node {
     def SF_USERNAME=env.HUB_ORG_DH
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
-    def PACKAGE_NAME='sfdxJenkinsPrject'
+    def PACKAGE_NAME='sfdxPrject'
     def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
@@ -77,7 +77,7 @@ node {
                     //println createPackage
                     
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                    
+                    /*
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -98,7 +98,7 @@ node {
                     response = null
                     
                     echo ${PACKAGE_VERSION}
-                    
+                    */
                     
                 }
                 
