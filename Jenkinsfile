@@ -51,45 +51,13 @@ node {
 				
 				println 'before withEnv'
 
-				
-				        
-				//rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
-                rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --setalias HubOrg"
-                //rc = sh returnStdout: true, script: "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
+				rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --setalias HubOrg"
                 println rc
-                /*
-                def person = rc
-                // Json String
-                def personJSON = new JsonBuilder(person)
-                println personJSON
-                // Json String to Map
-                def personMap = new JsonSlurper().parseText(personJSON)
-                
-                println(personMap)
-                */
-                //PACKAGE_VERSION = rc.result.orgId
-                //println PACKAGE_VERSION
                 if (rc != 0) {
                     println 'code in Authorize DevHub error block'
                     error 'Salesforce dev hub org authorization failed.'
                 }
             }
-
-            
-
-
-            // -------------------------------------------------------------------------
-            // Run unit tests in test scratch org.
-            // -------------------------------------------------------------------------
-            /*
-            stage('Run Tests In Test Scratch Org') {
-                rc = command "${toolbelt} force:apex:test:run --targetusername myScratchOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
-                if (rc != 0) {
-                    error 'Salesforce unit test run in test scratch org failed.'
-                }
-            }
-            */
-
 
             // -------------------------------------------------------------------------
             // Create package version.
@@ -111,7 +79,6 @@ node {
                 println output
                 // Wait 5 minutes for package replication.
                 sleep 30
-
                 
                 def jsonSlurper = new JsonSlurperClassic()
                 //def jsonSlurper = new JsonSlurper()
