@@ -59,7 +59,7 @@ node {
                 
                 def person = rc
                 // Json String
-                def personJSON = new JsonBuilder(person).toPrettyString()
+                def personJSON = new JsonBuilder(person)
                 println personJSON
                 // Json String to Map
                 def personMap = new JsonSlurper().parseText(personJSON)
