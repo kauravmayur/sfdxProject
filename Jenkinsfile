@@ -1,7 +1,9 @@
 #!groovy
 
 import groovy.json.JsonSlurperClassic
-import groovy.json.JsonSlurper
+import groovy.json.JsonBuilder  
+import groovy.json.JsonSlurper  
+import groovy.transform.ToString
 
 node {
 
@@ -54,7 +56,16 @@ node {
 				//rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                 rc = command "${toolbelt} force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --json --setalias HubOrg"
                 println rc
-                println rc.status
+                
+                def person = rc
+                // Json String
+                def personJSON = new JsonBuilder(person).toPrettyString()
+                // Json String to Map
+                def personMap = new JsonSlurper().parseText(personJSON)
+                // using Map to convert to Person object type
+                def newPerson = new Person(personMap)
+                println(person)
+                println(newPerson)
 
                 //PACKAGE_VERSION = rc.result.orgId
                 //println PACKAGE_VERSION
