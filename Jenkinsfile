@@ -79,7 +79,7 @@ node {
                     //println createPackage
                     
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                    
+                    /*
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -100,7 +100,7 @@ node {
                     response = null
                     
                     echo ${PACKAGE_VERSION}
-                    
+                    */
                     
                 }
                 
@@ -119,11 +119,11 @@ node {
                     
                 }
             }
-
+            
             finally {  
                 println 'Finally start'
                 //emailext body: 'This is email', recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is " , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                   
             }
         }
