@@ -79,7 +79,7 @@ node {
                     //println createPackage
                     
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                    /*
+                    
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -100,7 +100,7 @@ node {
                     response = null
                     
                     echo ${PACKAGE_VERSION}
-                    */
+                    
                     
                 }
                 
@@ -119,7 +119,7 @@ node {
                     
                 }
             }
-            
+
             finally {  
                 println 'Finally start'
                 //emailext body: 'This is email', recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
