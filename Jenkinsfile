@@ -10,7 +10,7 @@ node {
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='sfdxPrject'
-    def PACKAGE_VERSION
+    def PACKAGE_VERSION = '04t0K0000010rJXQAY'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
@@ -98,9 +98,10 @@ node {
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                    
-                    echo ${PACKAGE_VERSION}
                     */
+                    println PACKAGE_VERSION
+                    echo ${PACKAGE_VERSION}
+                    
                     
                 }
                 
@@ -108,22 +109,23 @@ node {
                 // -------------------------------------------------------------------------
                 // Create new scratch org to install package to.
                 // -------------------------------------------------------------------------
-                
+                /*
                 stage('Create Package Install Scratch Org') {
-                    /*
+                    
                     rc = command "${toolbelt} force:org:create --targetdevhubusername HubOrg --setdefaultusername --definitionfile config/project-scratch-def.json --setalias installorg --wait 10 --durationdays 1"
                     if (rc != 0) {
                         error 'Salesforce package install scratch org creation failed.'
                     }
-                    */
+                    
                     
                 }
+                */
             }
             
             finally {  
                 println 'Finally start'
                 //emailext body: 'This is email', recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is " , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                   
             }
         }
