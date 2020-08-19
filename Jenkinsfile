@@ -99,6 +99,10 @@ node {
                     println PACKAGE_VERSION
                     response = null
                     */
+                    when { equals expected: 123, actual: currentBuild.number }
+                    steps {
+                        echo "Hello, bitwiseman!"
+                    }
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
                     
