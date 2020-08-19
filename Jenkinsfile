@@ -79,13 +79,7 @@ node {
                     //println createPackage
 								              
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                     stage('Display Created Package ID') {
-                rc = command "${toolbelt} force:package:list"
-		 println rc
-                if (rc != 0) {
-                    error 'Salesforce Created Package ID display failed.'
-                }
-			/*
+                   /*
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -109,7 +103,7 @@ node {
                     echo ${PACKAGE_VERSION}
                     
                     
-                }
+                
                 
             }
 
