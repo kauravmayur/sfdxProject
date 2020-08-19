@@ -99,7 +99,7 @@ node {
                     println PACKAGE_VERSION
                     response = null
                     */
-                    when { equals expected: 123, actual: currentBuild.number }
+                    when { equals expected: 12, actual: currentBuild.number }
                     steps {
                         echo "Hello, bitwiseman!"
                     }
