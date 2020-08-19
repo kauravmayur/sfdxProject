@@ -104,7 +104,12 @@ node {
                     
                     
                 }
-                
+                stage('Display Created Package ID') {
+                rc = command "${toolbelt}/sfdx force:package:list --targetusername myScratchOrg"
+                if (rc != 0) {
+                    error 'Salesforce Created Package ID display failed.'
+                }
+            }
 
                 // -------------------------------------------------------------------------
                 // Create new scratch org to install package to.
