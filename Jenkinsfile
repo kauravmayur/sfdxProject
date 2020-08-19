@@ -62,7 +62,7 @@ node {
                 
                 stage('Run Tests In Test Scratch Org') {
                     
-                    rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                   // rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                     if (rc != 0) {
                         error 'Salesforce unit test run in test scratch org failed.'
                     }
@@ -79,7 +79,12 @@ node {
                     //println createPackage
 								              
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                     /*
+                     stage('Display Created Package ID') {
+                rc = command "${toolbelt}/sfdx force:package:list --targetusername myScratchOrg"
+                if (rc != 0) {
+                    error 'Salesforce Created Package ID display failed.'
+                }
+			/*
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -104,11 +109,7 @@ node {
                     
                     
                 }
-                stage('Display Created Package ID') {
-                rc = command "${toolbelt}/sfdx force:package:list --targetusername myScratchOrg"
-                if (rc != 0) {
-                    error 'Salesforce Created Package ID display failed.'
-                }
+                
             }
 
                 // -------------------------------------------------------------------------
