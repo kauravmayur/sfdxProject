@@ -75,26 +75,34 @@ node {
                 // -------------------------------------------------------------------------
                 
                 stage('Create Package Version') {
-			createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                        println createPackage
-                if (isUnix()) {
-                    output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
-                } else {
-                    output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json").trim()
-                    output = output.readLines().drop(1).join(" ")
-                }
-		 println output
-                // Wait 5 minutes for package replication.
-                sleep 30
-
-                def jsonSlurper = new JsonSlurper()
-                def response = jsonSlurper.parseText(output)
-
-                PACKAGE_VERSION = response.result.SubscriberPackageVersionId
-                response = null
+                    createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                    println createPackage
+								              
+                    //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
+                   
+                    if (isUnix()) {
+                        output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
+                    } else {
+                        output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json").trim()
+                        output = output.readLines().drop(1).join(" ")
+                    }
+                    println output
+                    // Wait 5 minutes for package replication.
+                    sleep 30
+                    
+                    //def jsonSlurper = new JsonSlurperClassic()
+                    def jsonSlurper = new JsonSlurper()
+                    def response = jsonSlurper.parseText(output)
+                    PACKAGE_VERSION = response.result.SubscriberPackageVersionId
+                    println PACKAGE_VERSION
+                    response = null
+                    
+                    println PACKAGE_VERSION
+                    echo ${PACKAGE_VERSION}
+                    
+                    
                 
-		println PACKAGE_VERSION
-                echo ${PACKAGE_VERSION}
+                
             }
 
                 // -------------------------------------------------------------------------
