@@ -101,7 +101,7 @@ node {
                     */
                     println 'When condition start'
                     println "${BUILD_NUMBER}"
-                    println BUILD_NUMBER}
+                    println BUILD_NUMBER
 
                     when { equals expected: 129, actual: ${BUILD_NUMBER} }
                     steps {
