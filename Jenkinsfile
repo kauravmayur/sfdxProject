@@ -55,14 +55,14 @@ node {
                     }
                     
                 }
-	      
+                
                 // -------------------------------------------------------------------------
                 // Run unit tests in test scratch org.
                 // -------------------------------------------------------------------------
                 
                 stage('Run Tests In Test Scratch Org') {
                     
-                   // rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                    rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                     if (rc != 0) {
                         error 'Salesforce unit test run in test scratch org failed.'
                     }
@@ -75,11 +75,11 @@ node {
                 // -------------------------------------------------------------------------
                 
                 stage('Create Package Version') {
-                    createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                    println createPackage
-								              
+                    //createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                    //println createPackage
+                    
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                   
+                     /*
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -89,21 +89,22 @@ node {
                     println output
                     // Wait 5 minutes for package replication.
                     sleep 30
+
                     
                     //def jsonSlurper = new JsonSlurperClassic()
                     def jsonSlurper = new JsonSlurper()
                     def response = jsonSlurper.parseText(output)
+
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                    
+                    */
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
                     
                     
+                }
                 
-                
-            }
 
                 // -------------------------------------------------------------------------
                 // Create new scratch org to install package to.
@@ -122,9 +123,9 @@ node {
             }
             
             finally {  
-               // println 'Finally start'
+                println 'Finally start'
                 //emailext body: 'This is email', recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                //emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                   
             }
         }
