@@ -99,10 +99,13 @@ node {
                     println PACKAGE_VERSION
                     response = null
                     */
-                    when { equals expected: 126, actual: currentBuild.number }
+                    println 'When condition start'
+                    when { equals expected: 127, actual: currentBuild.number }
                     steps {
-                        println PACKAGE_VERSION
+                        println 'When condition enter'
+                        
                     }
+                    println 'When condition end'
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
                     
