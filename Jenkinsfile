@@ -81,11 +81,11 @@ node {
     stage('Create Package Version') {
         when { 
             expression {
-                return PACKAGE_NAME
+                return createPackage
             }
         }
         steps {
-            echo "Hello, bitwiseman!" // Step executes only when PACKAGE_NAME is true
+            echo "Hello, bitwiseman!" // Step executes only when createPackage is true
 
 				}
 			}
