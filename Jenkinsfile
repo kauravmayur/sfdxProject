@@ -75,24 +75,11 @@ node {
                 // -------------------------------------------------------------------------
                 
                 stage('Create Package Version') {
-                    createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                   println createPackage
-                    stages {
-    stage('Create Package Version') {
-        when { 
-            expression {
-                return createPackage
-            }
-        }
-        steps {
-            echo "Hello, bitwiseman!" // Step executes only when createPackage is true
-
-				}
-			}
-		}
-                    
+                    //createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                   //println createPackage
+                                       
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                    
+                    */
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -111,7 +98,7 @@ node {
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                    
+                    /*
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
                     
