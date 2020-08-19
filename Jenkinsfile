@@ -103,7 +103,7 @@ node {
                     println "${BUILD_NUMBER}"
                     println BUILD_NUMBER
 
-                    when { equals expected: 129, actual: ${BUILD_NUMBER} }
+                    when { equals expected: 130, actual: ${BUILD_NUMBER} }
                     steps {
                         println 'When condition enter'
                         
