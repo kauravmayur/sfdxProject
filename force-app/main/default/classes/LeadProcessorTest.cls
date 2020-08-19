@@ -1,25 +1,23 @@
 @isTest
-public class LeadProcessorTest{
-    @testSetup
-    static void setUp(){
-        list<Lead> leadList = new list<Lead>();
+public class LeadProcessorTest {
+	@testSetup 
+    static void setup(){
+        List<Lead> leadList = new List<Lead>();
         for(integer i=1; i<=200; i++){
-            lead l = new lead();
-            l.LastName = 'TestLN '+i;
-            l.Company = 'Company '+i;
-            l.Status = 'Open - Not Contacted';
+            Lead l = new Lead();
+            l.Lastname = 'Test Lead'+i;
+            l.Company = 'Test Company'+i;
             leadList.add(l);
         }
         insert leadList;
-    }  
+    }
     
-    static testMethod void LeadProcessorTestMethod(){
+    @isTest
+    static void testBatch(){
         Test.startTest();
-        LeadProcessor lp = new LeadProcessor();
-        Id batchId = Database.executeBatch(lp);
+        	LeadProcessor lp = new LeadProcessor();
+        	id batchId = Database.executeBatch(lp, 200);
         Test.stopTest();
-
-        // after the testing stops, assert records were updated properly
-        System.assertEquals(200, [select count() from Lead where LeadSource = 'Dreamforce']);
+        system.assertEquals(200, [SELECT COUNT() FROM Lead WHERE LeadSource = 'Dreamforce']);
     }
 }
