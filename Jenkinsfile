@@ -103,7 +103,11 @@ node {
                     println "${BUILD_NUMBER}"
                     println BUILD_NUMBER
 
-                    
+                    when { PACKAGE_VERSION : 'H04t0K0000010rJXQAY' }
+                    steps {
+                        println 'When condition enter'
+                        
+                    }
                     println 'When condition end'
                     println PACKAGE_VERSION
                     //echo ${PACKAGE_VERSION}
