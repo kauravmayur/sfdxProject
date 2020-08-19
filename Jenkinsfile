@@ -99,7 +99,7 @@ node {
                     println PACKAGE_VERSION
                     response = null
                     */
-                    when { equals expected: 12, actual: currentBuild.number }
+                    when { equals expected: 126, actual: currentBuild.number }
                     steps {
                         println PACKAGE_VERSION
                     }
