@@ -103,11 +103,7 @@ node {
                     println "${BUILD_NUMBER}"
                     println BUILD_NUMBER
 
-                    when { equals expected: 132, actual: BUILD_NUMBER }
-                    steps {
-                        println 'When condition enter'
-                        
-                    }
+                    
                     println 'When condition end'
                     println PACKAGE_VERSION
                     //echo ${PACKAGE_VERSION}
