@@ -80,7 +80,7 @@ node {
 								              
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
                      stage('Display Created Package ID') {
-                rc = command "${toolbelt} force:package:list --targetusername myScratchOrg"
+                rc = command "${toolbelt} force:package:list"
                 if (rc != 0) {
                     error 'Salesforce Created Package ID display failed.'
                 }
