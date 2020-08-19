@@ -100,7 +100,9 @@ node {
                     response = null
                     */
                     println 'When condition start'
-                    when { equals expected: 127, actual: currentBuild.number }
+                    println "${BUILD_NUMBER}"
+                    echo ${BUILD_NUMBER}
+                    when { equals expected: 128, actual: ${BUILD_NUMBER} }
                     steps {
                         println 'When condition enter'
                         
