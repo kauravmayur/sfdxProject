@@ -10,7 +10,7 @@ node {
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='sfdxPrject'
-    def PACKAGE_VERSION = '04t0K0000010rJXQAY'
+    def PACKAGE_VERSION// = '04t0K0000010rJXQAY'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
@@ -55,14 +55,14 @@ node {
                     }
                     
                 }
-                
+	      
                 // -------------------------------------------------------------------------
                 // Run unit tests in test scratch org.
                 // -------------------------------------------------------------------------
                 
                 stage('Run Tests In Test Scratch Org') {
                     
-                    //rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                    rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                     if (rc != 0) {
                         error 'Salesforce unit test run in test scratch org failed.'
                     }
@@ -76,15 +76,10 @@ node {
                 
                 stage('Create Package Version') {
                     //createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                   //println createPackage              
+                    //println createPackage
+								              
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                  stage('Display Created Package ID') {
-                rc = command "${toolbelt}/sfdx force:package:list --targetusername myScratchOrg"
-                if (rc != 0) {
-                    error 'Salesforce Created Package ID display failed.'
-                }
-            }
-                   /*
+                     /*
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -103,7 +98,7 @@ node {
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                    /*
+                    */
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
                     
@@ -129,7 +124,7 @@ node {
             
             finally {  
                 println 'Finally start'
-                //emailext body: "This is email", recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
+                //emailext body: 'This is email', recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
                 emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                   
             }
