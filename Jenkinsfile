@@ -81,17 +81,17 @@ node {
                     output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --json --targetdevhubusername HubOrg").trim()
                     output = output.readLines().drop(1).join(" ")
                 }
-				 println output
+		 println output
                 // Wait 5 minutes for package replication.
                 sleep 30
 
-                def jsonSlurper = new JsonSlurperClassic()
+                def jsonSlurper = new JsonSlurper()
                 def response = jsonSlurper.parseText(output)
 
                 PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                 response = null
-                echo ${PACKAGE_VERSION}
-				println PACKAGE_VERSION
+                
+		println PACKAGE_VERSION
                 echo ${PACKAGE_VERSION}
             }
 
@@ -111,10 +111,10 @@ node {
                 */
             }
             
-            finally {  
-                println 'Finally start'
+           // finally {  
+               // println 'Finally start'
                 //emailext body: 'This is email', recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                //emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                   
             }
         }
