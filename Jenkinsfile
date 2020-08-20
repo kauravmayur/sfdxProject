@@ -40,7 +40,7 @@ node {
     }
 }'''
     println inputFile
-    def InputJSON = new JsonSlurper().parseText(inputFile.text)
+    def InputJSON = new JsonSlurper().parseText(inputFile)
     InputJSON.each{ println it }
 
     println packageName
