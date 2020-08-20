@@ -3,7 +3,7 @@
         {
             "path": "force-app",
             "default": true,
-            "package": "sfdxPrjectJenkinsDemo",
+            "package": "sfdxPrject",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT"
         },
@@ -19,7 +19,7 @@
     "sfdcLoginUrl": "https://login.salesforce.com",
     "sourceApiVersion": "45.0",
     "packageAliases": {
-        "sfdxPrjectJenkinsDemo": "",
-        "sfdxPrjectJenkinsDemo@0.1.0-1": "04t0K000001KiJkQAK"
+        "sfdxPrject": "0Ho0K000000TN5qSAG",
+        "sfdxPrject@0.1.0-1": "04t0K000001KiJkQAK"
     }
 }
