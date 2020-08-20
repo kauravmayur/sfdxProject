@@ -39,6 +39,7 @@ node {
         "sfdxPrject@0.1.0-1": "04t0K000001KiJkQAK"
     }
 }'''
+    println inputFile
     def InputJSON = new JsonSlurper().parseText(inputFile.text)
     InputJSON.each{ println it }
 
