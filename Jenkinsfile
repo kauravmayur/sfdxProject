@@ -17,7 +17,7 @@ node {
     //def inputFile = new File("C:\\Jenkins\\sfdxProject\\sfdx-project.json")
 
     def props = readJSON text: '{ "key": "value" }'
-    println inppropsutFile
+    println props
 
     def inputFile = readJSON file: 'C:/Jenkins/sfdxProject/sfdx-project.json'
     println inputFile
