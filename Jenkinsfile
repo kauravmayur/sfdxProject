@@ -14,33 +14,10 @@ node {
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
-    def inputFile = '''{
-    "packageDirectories": [
-        {
-            "path": "force-app",
-            "default": true,
-            "package": "sfdxPrject",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT"
-        },
-        {
-            "path": "force-app\\main\\default",
-            "package": "jenkins",
-            "versionName": "Jenkins Winter ‘20",
-            "versionNumber": "1.0.0.NEXT",
-            "default": false
-        }
-    ],
-    "namespace": "",
-    "sfdcLoginUrl": "https://login.salesforce.com",
-    "sourceApiVersion": "45.0",
-    "packageAliases": {
-        "sfdxPrject": "0Ho0K000000TN5qSAG",
-        "sfdxPrject@0.1.0-1": "04t0K000001KiJkQAK"
-    }
-}'''
+    def inputFile = new File("C:\\Office_Project\\SFDXProject\\sfdxProject-1\\sfdx-project.json")
+    
     println inputFile
-    def InputJSON = new JsonSlurper().parseText(inputFile)
+    //def InputJSON = new JsonSlurper().parseText(inputFile.text)
     InputJSON.each{ println it }
 
     println packageName
