@@ -14,7 +14,7 @@ node {
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
-    def inputFile = new File("C:\\Office_Project\\SFDXProject\\sfdxProject-1\\sfdx-project.json")
+    def inputFile = new File("C:\\Jenkins\\sfdxProject\\sfdx-project.json")
     
     println inputFile
     //def InputJSON = new JsonSlurper().parseText(inputFile.text)
