@@ -20,7 +20,7 @@ node {
     println 'packageName'
     println inputFile.packageAliases.sfdxPrject
     PACKAGE_Id = inputFile.packageAliases.sfdxPrject
-    println 'PACKAGE_Id ' PACKAGE_Id
+    println PACKAGE_Id
 
     
 
