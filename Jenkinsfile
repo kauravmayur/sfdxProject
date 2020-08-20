@@ -10,19 +10,17 @@ node {
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='sfdxPrject'
-    def PACKAGE_VERSION = '04t0K0000010rJXQAY'
+    def PACKAGE_VERSION
+    def PACKAGE_Id
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
-    //def inputFile = new File("C:\\Jenkins\\sfdxProject\\sfdx-project.json")
-
     def inputFile = readJSON file: 'C:/Jenkins/sfdxProject/sfdx-project.json'
     println inputFile
-    //def InputJSON = new JsonSlurper().parseText(inputFile)
-    //InputJSON.each{ println it }
     println 'packageName'
     println inputFile.packageAliases.sfdxPrject
-    
+    PACKAGE_Id = inputFile.packageAliases.sfdxPrject
+    println 'PACKAGE_Id ' PACKAGE_Id
 
     
 
