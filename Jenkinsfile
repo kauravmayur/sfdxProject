@@ -14,6 +14,10 @@ node {
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
+    def constants = load 'sfdx-project.json'
+    def packageName = constants.sfdxPrject
+
+    println packageName
 
     
 
