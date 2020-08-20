@@ -16,12 +16,9 @@ node {
     def toolbelt = tool 'toolbelt'
     //def inputFile = new File("C:\\Jenkins\\sfdxProject\\sfdx-project.json")
 
-    def props = readJSON text: '{ "key": "value" }'
-    println props
-
     def inputFile = readJSON file: 'C:/Jenkins/sfdxProject/sfdx-project.json'
     println inputFile
-    //def InputJSON = new JsonSlurper().parseText(inputFile.text)
+    def InputJSON = new JsonSlurper().parseText(inputFile)
     InputJSON.each{ println it }
 
     println packageName
