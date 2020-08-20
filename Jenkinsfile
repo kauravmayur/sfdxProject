@@ -19,9 +19,10 @@ node {
     def inputFile = readJSON file: 'C:/Jenkins/sfdxProject/sfdx-project.json'
     println inputFile
     def InputJSON = new JsonSlurper().parseText(inputFile)
-    InputJSON.each{ println it }
-
-    println packageName
+    //InputJSON.each{ println it }
+    println 'packageName'
+    println InputJSON.packageAliases.sfdxPrject
+    
 
     
 
