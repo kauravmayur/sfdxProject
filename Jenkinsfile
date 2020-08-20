@@ -99,16 +99,14 @@ node {
                     println PACKAGE_VERSION
                     response = null
                     */
-                    println 'When condition start'
+                    println 'if condition start'
                     println "${BUILD_NUMBER}"
-                    println BUILD_NUMBER
-
-                    when { PACKAGE_VERSION : '04t0K0000010rJXQAY' }
-                    steps {
-                        println 'When condition enter'
-                        
+                    
+                    if(PACKAGE_VERSION == '04t0K0000010rJXQAY'){
+                        println 'if condition enter'
                     }
-                    println 'When condition end'
+                    
+                    println 'if condition end'
                     println PACKAGE_VERSION
                     //echo ${PACKAGE_VERSION}
                     
