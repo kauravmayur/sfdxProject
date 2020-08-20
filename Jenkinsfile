@@ -9,11 +9,17 @@ node {
     def SF_USERNAME=env.HUB_ORG_DH
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
-    def PACKAGE_NAME='sfdxPrject'
-    def PACKAGE_VERSION// = '04t0K0000010rJXQAY'
+    def PACKAGE_NAME='sfdxPrjectJenkinsDemo'
+    def PACKAGE_VERSION
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
+    def inputFile = readJSON file: 'C:/Jenkins/sfdxProject/sfdx-project.json'
+    println inputFile
+    println 'packageName'
+    println inputFile.packageAliases.sfdxPrject
+    PACKAGE_Id = inputFile.packageAliases.sfdxPrject
+    println PACKAGE_Id
 
     
 
@@ -75,11 +81,18 @@ node {
                 // -------------------------------------------------------------------------
                 
                 stage('Create Package Version') {
-                    //createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
-                    //println createPackage
                     
-                    //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                     /*
+                    println 'if condition start'
+                    println "${BUILD_NUMBER}"
+                    
+                    if(PACKAGE_Id == '0Hoxxxxxxxxxxxxxxx'){
+                        println 'if blank condition enter'
+                        createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                        println 'Package created'
+                        println createPackage
+                    }
+                    
+                    
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -98,9 +111,12 @@ node {
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                    */
+                    
+                    
+                    
+                    println 'if condition end'
                     println PACKAGE_VERSION
-                    echo ${PACKAGE_VERSION}
+                    //echo ${PACKAGE_VERSION}
                     
                     
                 }
