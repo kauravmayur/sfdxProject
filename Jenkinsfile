@@ -15,6 +15,8 @@ node {
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
+    def inputFile = readJSON file: 'https://github.com/kauravmayur/sfdxProject/blob/master/sfdx-project.json'
+    println inputFile
     
 
     // -------------------------------------------------------------------------
