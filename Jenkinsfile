@@ -61,10 +61,12 @@ node {
                 // -------------------------------------------------------------------------
                 
                 stage('Run Tests In Test Scratch Org') {
+                   /*
                     rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                     if (rc != 0) {
                         error 'Salesforce unit test run in test scratch org failed.'
                     }
+                    */
                 }
                 
                 
@@ -75,6 +77,7 @@ node {
                 stage('Create Package Version') {
                     //createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                     //println createPackage
+                    /*
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -94,6 +97,7 @@ node {
                     
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
+                    */
                 }
                 
 
@@ -116,10 +120,12 @@ node {
                 // -------------------------------------------------------------------------
 
                 stage('Install Package In target Org') {
+                    /*
                     rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername HubTargetOrg --wait 10"
                     if (rc != 0) {
                         error 'Salesforce package install failed.'
                     }
+                    */
                 }
 
                 // -------------------------------------------------------------------------
@@ -127,10 +133,12 @@ node {
                 // -------------------------------------------------------------------------
 
                 stage('Run Tests In Package Install target Org') {
+                   /*
                     rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL} --wait 10"
                     if (rc != 0) {
                         error 'Salesforce unit test run in pacakge install scratch org failed.'
                     }
+                    */
                 }
             }
             
