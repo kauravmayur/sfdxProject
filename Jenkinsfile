@@ -109,7 +109,7 @@ node {
                     println 'if condition start'
                     println "${BUILD_NUMBER}"
                     
-                    if(PACKAGE_Id == ''){
+                    if(PACKAGE_Id == '0Hoxxxxxxxxxxxxxxx'){
                         println 'if blank condition enter'
                     }
                     if(PACKAGE_Id == '0Ho0K000000TN5qSAG'){
