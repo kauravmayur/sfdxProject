@@ -15,6 +15,12 @@ node {
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
 
+    def inputFile = readJSON file: 'C:/Jenkins/sfdxProject/sfdx-project.json'
+	def PACKAGE_Id
+    println inputFile
+    //println inputFile.packageAliases.sfdxPrject
+    PACKAGE_Id = inputFile.packageAliases.sfdxPrjectJunkinsv1
+    println PACKAGE_Id
 
     // -------------------------------------------------------------------------
     // Check out code from source control.
@@ -78,7 +84,22 @@ node {
                     //println createPackage
                     
                     //output = command "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json "
-                    /*
+                    println 'if condition start'
+                    println "${BUILD_NUMBER}"
+                    
+                    if(PACKAGE_Id == ''){
+                        println 'if blank condition enter'
+                        createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                        println 'Package created'
+                        println createPackage
+                    }
+                    if(PACKAGE_Id == null){
+                        println 'if blank condition enter null'
+                        createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
+                        println 'Package created'
+                        println createPackage
+                    }
+
                     if (isUnix()) {
                         output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
                     } else {
@@ -97,7 +118,7 @@ node {
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                    */
+                    
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
                     
