@@ -21,7 +21,7 @@ node {
     //def InputJSON = new JsonSlurper().parseText(inputFile)
     //InputJSON.each{ println it }
     println 'packageName'
-    println InputJSON.packageAliases.sfdxPrject
+    println inputFile.packageAliases.sfdxPrject
     
 
     
