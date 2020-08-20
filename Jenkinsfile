@@ -102,7 +102,7 @@ node {
                     println 'if condition start'
                     println "${BUILD_NUMBER}"
                     
-                    if(PACKAGE_VERSION == '04t0K0000010rJXQAY'){
+                    if(PACKAGE_VERSION == 'j04t0K0000010rJXQAY'){
                         println 'if condition enter'
                     }
                     
