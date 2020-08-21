@@ -1,4 +1,5 @@
 global class LeadProcessor implements Database.Batchable<sObject>{
+    public integer recordsCounts = 0;
     global Database.QueryLocator start(Database.BatchableContext bc){
         return Database.getQueryLocator('SELECT ID, LeadSource FROM Lead');
     }
