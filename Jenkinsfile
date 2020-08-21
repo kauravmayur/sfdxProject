@@ -61,14 +61,11 @@ node {
                 // -------------------------------------------------------------------------
                 
                 stage('Run Tests In Test Scratch Org') {
-                   /*
                     rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                     if (rc != 0) {
                         error 'Salesforce unit test run in test scratch org failed.'
                     }
-                    */
                 }
-                
                 
                 // -------------------------------------------------------------------------
                 // Create package version.
@@ -94,10 +91,10 @@ node {
                     PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                     println PACKAGE_VERSION
                     response = null
-                    
+                    */
                     println PACKAGE_VERSION
                     echo ${PACKAGE_VERSION}
-                    */
+                    
                 }
                 
 
@@ -120,12 +117,10 @@ node {
                 // -------------------------------------------------------------------------
 
                 stage('Install Package In target Org') {
-                    /*
                     rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername HubTargetOrg --wait 10"
                     if (rc != 0) {
                         error 'Salesforce package install failed.'
                     }
-                    */
                 }
 
                 // -------------------------------------------------------------------------
@@ -133,19 +128,17 @@ node {
                 // -------------------------------------------------------------------------
 
                 stage('Run Tests In Package Install target Org') {
-                   /*
                     rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL} --wait 10"
                     if (rc != 0) {
                         error 'Salesforce unit test run in pacakge install scratch org failed.'
                     }
-                    */
                 }
             }
             
             finally {  
                 println 'Finally start'
                 //emailext body: "This is email", recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                //emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                   
             }
         }
