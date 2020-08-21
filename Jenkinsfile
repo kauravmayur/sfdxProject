@@ -113,6 +113,17 @@ node {
                 }
 
                 // -------------------------------------------------------------------------
+                // Run unit tests in package install scratch org.
+                // -------------------------------------------------------------------------
+
+                stage('Run Tests In Package Install target Org') {
+                    rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
+                    if (rc != 0) {
+                        error 'Salesforce unit test run in pacakge install scratch org failed.'
+                    }
+                }
+
+                // -------------------------------------------------------------------------
                 // Install package in target org.
                 // -------------------------------------------------------------------------
 
@@ -123,16 +134,7 @@ node {
                     }
                 }
 
-                // -------------------------------------------------------------------------
-                // Run unit tests in package install scratch org.
-                // -------------------------------------------------------------------------
-
-                stage('Run Tests In Package Install target Org') {
-                    rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --json --testlevel ${TEST_LEVEL} --wait 10"
-                    if (rc != 0) {
-                        error 'Salesforce unit test run in pacakge install scratch org failed.'
-                    }
-                }
+                
             }
             
             finally {  
