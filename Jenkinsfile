@@ -12,7 +12,7 @@ node {
     def SERVER_KEY_CREDENTALS_ID=env.JWT_CRED_ID_DH
     def TEST_LEVEL='RunLocalTests'
     def PACKAGE_NAME='sfdxPrject'
-    def PACKAGE_VERSION// = '04t0K0000010rN5QAI'
+    def PACKAGE_VERSION = '04t0K0000010rN5QAI'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://login.salesforce.com"
     def SFDC_USERNAME
     def toolbelt = tool 'toolbelt'
