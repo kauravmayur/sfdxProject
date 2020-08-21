@@ -92,8 +92,8 @@ node {
                     println PACKAGE_VERSION
                     response = null
                     */
-                    println PACKAGE_VERSION
-                    echo ${PACKAGE_VERSION}
+                    //println PACKAGE_VERSION
+                    //echo ${PACKAGE_VERSION}
                     
                 }
                 
