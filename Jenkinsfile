@@ -74,7 +74,7 @@ node {
                 stage('Create Package Version') {
                     when {
 						expression {
-								PACKAGE_NAME == null || PACKAGE_NAME == 'true'
+								PACKAGE_NAME == 'true'
 							}
 						}
                     
