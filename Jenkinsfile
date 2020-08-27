@@ -73,7 +73,7 @@ node {
                 
                 stage('Create Package Version') {
                     
-                    if (PACKAGE_NAME == 'sfdxPrject') { 
+                    if (PACKAGE_NAME == ' ') { 
                     createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                     println createPackage
                     } else {                         
