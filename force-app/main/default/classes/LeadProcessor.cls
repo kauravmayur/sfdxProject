@@ -5,7 +5,7 @@ public class LeadProcessor implements Database.Batchable<sObject>{
     }
 
     public void execute(Database.BatchableContext bc, list<Lead> scope){
-        //system.debug('****LeadProcessor debug update****');
+        system.debug('****LeadProcessor debug update****');
         system.debug('****LeadProcessor debug update****');
         for(Lead ld: scope){
             ld.leadSource = 'Dreamforce';
