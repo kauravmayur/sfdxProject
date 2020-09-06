@@ -65,6 +65,9 @@ node {
                             error 'Salesforce unit test run in test scratch org failed.'
                         }
                     }
+                    emailext body: "${DEFAULT_CONTENT}",
+                    recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                    subject: "${DEFAULT_SUBJECT}"
                 }
                 if(JOB_NAME == 'Demo/Jenkins'){
                     // -------------------------------------------------------------------------
@@ -134,16 +137,16 @@ node {
                         }
                     }
 
-                    
+                    finally {  
+                        println 'Finally start'
+                        //emailext body: "This is email", recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
+                        emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                        
+                    }
                 }
             }
             
-            finally {  
-                println 'Finally start'
-                //emailext body: "This is email", recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
-                  
-            }
+            
         }
     }
        
