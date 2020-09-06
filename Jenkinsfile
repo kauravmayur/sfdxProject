@@ -61,6 +61,7 @@ node {
                     // -------------------------------------------------------------------------
                     stage('Run Tests In Test Scratch Org') {
                         rc = command "${toolbelt} force:apex:test:run --targetusernames HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                        println rc
                         if (rc != 0) {
                             error 'Salesforce unit test run in test scratch org failed.'
                         }
