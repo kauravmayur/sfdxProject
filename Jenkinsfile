@@ -68,9 +68,11 @@ node {
                             currentResponse = 'FAILURE'
                             error 'Salesforce unit test run in test scratch org failed.'
                         }
+                        /*
                         emailext body: "${currentResponse}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
                         recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                         subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+                        */
                     }
                     
                     
@@ -115,6 +117,7 @@ node {
                         rc = command "${toolbelt} force:auth:jwt:grant --clientid ${CONNECTED_APP_TARGET_CONSUMER_KEY_DH} --username ${SF_USERNAME_TARGET} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}  --setalias HubTargetOrg"
                         println rc
                         if (rc != 0) {
+                            currentResponse = 'FAILURE'
                             println 'code in Authorize target org error block'
                             error 'Salesforce target org authorization failed.'
                         }
@@ -128,6 +131,7 @@ node {
                     stage('Run Tests In Package Install target Org') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
                         if (rc != 0) {
+                            currentResponse = 'FAILURE'
                             error 'Salesforce unit test run in pacakge install scratch org failed.'
                         }
                     }
@@ -139,12 +143,13 @@ node {
                     stage('Install Package In target Org') {
                         rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername HubTargetOrg --wait 10"
                         if (rc != 0) {
+                            currentResponse = 'FAILURE'
                             error 'Salesforce package install failed.'
                         }
                     }
 
                     //emailext body: "This is email", recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
-                    emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
+                    //emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
                 }
             
             }
@@ -152,7 +157,9 @@ node {
                 println 'Finally start'
                 //emailext body: "This is email", recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: 'Test'
                 //emailext body: "This is to inform you that Job '${JOB_NAME}' (${BUILD_NUMBER}) having ${currentBuild.currentResult} status and your Subscriber Package Version Id is ${PACKAGE_VERSION}" , recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], subject: "Job '${JOB_NAME}' (${BUILD_NUMBER}) ${currentBuild.currentResult} - confirmation"
-                
+                emailext body: "${currentResponse}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
             }
             
         }
