@@ -62,17 +62,12 @@ node {
                     // Run unit tests in test scratch org.
                     // -------------------------------------------------------------------------
                     stage('Run Tests In Test Scratch Org') {
-                        rc = command "${toolbelt} force:apex:test:run --targetusernames HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
+                        rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                         println rc
                         if (rc != 0) {
                             currentResponse = 'FAILURE'
                             error 'Salesforce unit test run in test scratch org failed.'
                         }
-                        /*
-                        emailext body: "${currentResponse}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                        subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
-                        */
                     }
                     
                     
@@ -130,6 +125,7 @@ node {
 
                     stage('Run Tests In Package Install target Org') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
+                        
                         if (rc != 0) {
                             currentResponse = 'FAILURE'
                             error 'Salesforce unit test run in pacakge install scratch org failed.'
