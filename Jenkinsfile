@@ -61,7 +61,7 @@ node {
                     // -------------------------------------------------------------------------
                     // Run unit tests in test scratch org.
                     // -------------------------------------------------------------------------
-                    stage('Run Tests In Test DevHub') {
+                    stage('Tests DevHub') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                         println rc
                         if (rc != 0) {
@@ -120,7 +120,7 @@ node {
                     // Run unit tests in package install scratch org.
                     // -------------------------------------------------------------------------
 
-                    stage('Run Tests In  Target') {
+                    stage('Tests Target') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
                         
                         if (rc != 0) {
@@ -133,7 +133,7 @@ node {
                     // Install package in target org.
                     // -------------------------------------------------------------------------
 
-                    stage('Deployment In Target Org') {
+                    stage('Deployment') {
                         rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername HubTargetOrg --wait 10"
                         if (rc != 0) {
                             currentResponse = 'FAILURE'
