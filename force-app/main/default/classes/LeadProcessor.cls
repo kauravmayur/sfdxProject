@@ -9,7 +9,7 @@ global class LeadProcessor implements Database.Batchable<sObject>{
         //system.debug('****LeadProcessor debug update****');
         for(Lead ld: scope){
             ld.leadSource = 'Dreamforce';
-            recordsCounts = recordsCounts + 1
+            recordsCounts = recordsCounts + 1;
         }
         update scope;
     }
