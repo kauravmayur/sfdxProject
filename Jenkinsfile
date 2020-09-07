@@ -61,7 +61,7 @@ node {
                     // -------------------------------------------------------------------------
                     // Run unit tests in test scratch org.
                     // -------------------------------------------------------------------------
-                    stage('Run Tests In Test Scratch Org') {
+                    stage('Run Tests In Test DevHub') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                         println rc
                         if (rc != 0) {
@@ -77,19 +77,19 @@ node {
                     // Create package version.
                     // -------------------------------------------------------------------------
                     stage('Create Package Version') {
-                        /*
+                        
                         if (PACKAGE_NAME == 'true') { 
                         createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                         println createPackage
                         } else {                         
                                                         
-                        if (isUnix()) {
-                            output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
-                        } else {
-                            output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json").trim()
-                            output = output.readLines().drop(1).join(" ")
+                            if (isUnix()) {
+                                output = sh returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json"
+                            } else {
+                                output = bat(returnStdout: true, script: "${toolbelt} force:package:version:create --package ${PACKAGE_NAME} --installationkeybypass --wait 10 --targetdevhubusername HubOrg  --json").trim()
+                                output = output.readLines().drop(1).join(" ")
+                            }
                         }
-                    }
                         println output
                         // Wait 5 minutes for package replication.
                         def jsonSlurper = new JsonSlurper()
@@ -97,17 +97,14 @@ node {
                         PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                         println PACKAGE_VERSION
                         response = null
-                        */                                       
-                    
-                        println PACKAGE_VERSION
                     }
                     
 
                     // -------------------------------------------------------------------------
                     // Authorize target org to install package to.
                     // -------------------------------------------------------------------------
-                    stage('Authorize target org') {
-                        println 'code in Authorize DevHub'
+                    stage('Authorize Target') {
+                        println 'Code in Authorized Target Org'
                         //rc = command "${toolbelt} force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile ${server_key_file} --setdefaultdevhubusername --setalias HubOrg"
                         rc = command "${toolbelt} force:auth:jwt:grant --clientid ${CONNECTED_APP_TARGET_CONSUMER_KEY_DH} --username ${SF_USERNAME_TARGET} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}  --setalias HubTargetOrg"
                         println rc
@@ -123,7 +120,7 @@ node {
                     // Run unit tests in package install scratch org.
                     // -------------------------------------------------------------------------
 
-                    stage('Run Tests In Package Install target Org') {
+                    stage('Run Tests In  Target') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
                         
                         if (rc != 0) {
@@ -136,7 +133,7 @@ node {
                     // Install package in target org.
                     // -------------------------------------------------------------------------
 
-                    stage('Install Package In target Org') {
+                    stage('Deployment In Target Org') {
                         rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername HubTargetOrg --wait 10"
                         if (rc != 0) {
                             currentResponse = 'FAILURE'
