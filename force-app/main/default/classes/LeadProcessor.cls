@@ -1,10 +1,10 @@
-global class LeadProcessor implements Database.Batchable<sObject>{
+public class LeadProcessor implements Database.Batchable<sObject>{
     public integer recordsCounts = 0;
-    global Database.QueryLocator start(Database.BatchableContext bc){
+    public Database.QueryLocator start(Database.BatchableContext bc){
         return Database.getQueryLocator('SELECT ID, LeadSource FROM Lead');
     }
 
-    public void execute(Database.BatchableContext BC, list<Lead> scope){
+    public void execute(Database.BatchableContext bc, list<Lead> scope){
         system.debug('****LeadProcessor debug update****');
         //system.debug('****LeadProcessor debug update****');
         for(Lead ld: scope){
@@ -14,7 +14,7 @@ global class LeadProcessor implements Database.Batchable<sObject>{
         update scope;
     }
     
-global void finish(Database.BatchableContext bc){
+public void finish(Database.BatchableContext bc){
         System.debug('***** LeadProcessor Finished *****');
     }
 }
