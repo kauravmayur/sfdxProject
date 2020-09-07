@@ -61,7 +61,7 @@ node {
                     // -------------------------------------------------------------------------
                     // Run unit tests in test scratch org.
                     // -------------------------------------------------------------------------
-                    stage('Tests DevHub') {
+                    stage('Test DevHub') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                         println rc
                         if (rc != 0) {
@@ -122,7 +122,7 @@ node {
                     // Run unit tests in package install scratch org.
                     // -------------------------------------------------------------------------
 
-                    stage('Tests Target') {
+                    stage('Test Target') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
                         
                         if (rc != 0) {
