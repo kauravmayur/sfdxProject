@@ -7,6 +7,7 @@ public class LeadProcessorTest {
             Lead l = new Lead();
             l.Lastname = 'Test Lead'+i;
             l.Company = 'Test Company'+i;
+            LeadSource = 'Dreamforce'
             leadList.add(l);
         }
         insert leadList;
