@@ -4,7 +4,7 @@ global class LeadProcessor implements Database.Batchable<sObject>{
         return Database.getQueryLocator('SELECT ID, LeadSource FROM Lead');
     }
 
-    public void execute(Database.BatchableContext BC, list<Lead> scope){
+    global void execute(Database.BatchableContext bc, list<Lead> scope){
         system.debug('****LeadProcessor debug update****');
         //system.debug('****LeadProcessor debug update****');
         for(Lead ld: scope){
