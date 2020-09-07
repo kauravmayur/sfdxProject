@@ -8,7 +8,7 @@ public class LeadProcessor implements Database.Batchable<sObject>{
         system.debug('****LeadProcessor debug update****');
         //system.debug('****LeadProcessor debug update****');
         for(Lead ld: scope){
-            ld.leadSource = 'Dreamforce';
+            ld.leadSource = 'Web';
             recordsCounts = recordsCounts + 1;
         }
         update scope;
