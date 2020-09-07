@@ -77,7 +77,7 @@ node {
                     // Create package version.
                     // -------------------------------------------------------------------------
                     stage('Build Package') {
-                        /*
+                        
                         if (PACKAGE_NAME == 'true') { 
                         createPackage = command "${toolbelt}  force:package:create --name ${PACKAGE_NAME} --description My_Package --packagetype Unlocked --path force-app --nonamespace --targetdevhubusername HubOrg"
                         println createPackage
@@ -97,8 +97,8 @@ node {
                         PACKAGE_VERSION = response.result.SubscriberPackageVersionId
                         println PACKAGE_VERSION
                         response = null
-                        */
-                        println PACKAGE_VERSION
+                        
+                        
                     }
                     
 
