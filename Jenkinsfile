@@ -61,7 +61,7 @@ node {
                     // -------------------------------------------------------------------------
                     // Run unit tests in test scratch org.
                     // -------------------------------------------------------------------------
-                    stage('Test DevHub') {
+                    stage('Validate Build') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubOrg --wait 10 --resultformat tap --codecoverage --testlevel ${TEST_LEVEL}"
                         println rc
                         if (rc != 0) {
@@ -120,21 +120,21 @@ node {
                     // -------------------------------------------------------------------------
                     // Run unit tests in package install scratch org.
                     // -------------------------------------------------------------------------
-
+                    /*
                     stage('Test Target') {
                         rc = command "${toolbelt} force:apex:test:run --targetusername HubTargetOrg --resultformat tap --codecoverage --testlevel ${TEST_LEVEL} --wait 10"
                         
                         if (rc != 0) {
                             currentResponse = 'FAILURE'
-                            error 'Salesforce unit test run in pacakge install scratch org failed.'
+                            error 'Salesforce unit test run in pacakge install intarget org failed.'
                         }
                     }
-
+                    */
                     // -------------------------------------------------------------------------
                     // Install package in target org.
                     // -------------------------------------------------------------------------
 
-                    stage('Deployment') {
+                    stage('Run Test and Deploy') {
                         rc = command "${toolbelt} force:package:install --package ${PACKAGE_VERSION} --targetusername HubTargetOrg --wait 10"
                         if (rc != 0) {
                             currentResponse = 'FAILURE'
